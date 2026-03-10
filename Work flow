@@ -1,0 +1,158 @@
+Below is the same structure rewritten for your AutoFolio project so you can directly use it in GitHub README, assignment, or project documentation.
+
+
+---
+
+📌 Project Description
+
+The AutoFolio – Vehicle Portfolio Manager is a practical Flutter mobile application designed to help vehicle owners manage their vehicle information, track fuel usage, maintain service records, and monitor expenses.
+
+The application works as a digital vehicle logbook, allowing users to record important vehicle-related data and analyze vehicle performance over time.
+
+This project demonstrates the use of:
+
+Stateful Widgets
+
+Multi-screen Navigation in Flutter
+
+List management and data handling
+
+Form input using TextFormField
+
+Clean UI design using Material Design components
+
+Basic vehicle data tracking and management
+
+
+
+---
+
+🚀 Features
+
+✅ Add and manage multiple vehicles
+✅ Record fuel entries (litres, cost, odometer reading)
+✅ Track vehicle fuel efficiency and mileage
+✅ Maintain digital service history records
+✅ View recent vehicle activities
+✅ Reminder system for maintenance and insurance
+✅ Clean dashboard interface with organized vehicle data
+
+
+---
+
+🛠️ Technologies Used
+
+Flutter – Cross-platform mobile development framework
+
+Dart – Programming language used in Flutter
+
+Material Design Widgets – For building responsive UI components
+
+Hive (Local Database) – For offline data storage
+
+
+
+---
+
+📱 App Workflow
+
+1️⃣ When the app starts, the user lands on the AutoFolio Dashboard displaying vehicle information and recent activities.
+
+2️⃣ Users can add a new vehicle from the navigation drawer or dashboard.
+
+3️⃣ Users can record fuel entries by entering:
+
+Odometer reading
+
+Fuel litres
+
+Fuel cost
+
+
+4️⃣ The system tracks fuel data and calculates fuel efficiency and expenses.
+
+5️⃣ Users can open the Service Reminder screen to view upcoming maintenance alerts such as:
+
+Oil change
+
+Insurance renewal
+
+Tyre replacement
+
+
+6️⃣ The dashboard shows a summary of vehicle data, including mileage and recent activities.
+
+
+---
+
+📂 Project Structure
+
+The project follows a simple Flutter structure with separate screens for different functionalities.
+
+lib/
+ ├── main.dart
+ ├── screens/
+ │    ├── home_page.dart
+ │    ├── fuel_entry_screen.dart
+ │    └── service_reminder_screen.dart
+ ├── models/
+ │    └── vehicle.dart
+
+The application uses:
+
+StatefulWidget for dynamic UI updates
+
+Navigator.push() for navigation between screens
+
+TextFormField for user input forms
+
+ListView for displaying records
+
+Local data storage for saving vehicle information
+
+
+
+---
+
+🎯 Learning Outcomes
+
+Through this project, the following Flutter concepts were learned:
+
+Understanding Flutter widget tree structure
+
+Implementing StatefulWidgets and UI updates
+
+Creating multi-screen navigation
+
+Handling user input forms
+
+Managing lists and dynamic data
+
+Building structured UI using Material widgets
+
+Designing real-world problem-solving applications
+
+
+
+---
+
+📌 Future Improvements
+
+Possible improvements that can enhance the application:
+
+Store vehicle data permanently using Hive or SQLite
+
+Add fuel efficiency charts and analytics
+
+Add expense visualization graphs
+
+Implement push notifications for service reminders
+
+Add cloud backup and synchronization
+
+Enable vehicle document storage (insurance, RC, etc.)
+
+Add dark mode support
+
+
+
