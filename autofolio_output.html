@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoFolio - Flutter App Output</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-image: radial-gradient(ellipse at 20% 20%, #16213e 0%, #1a1a2e 60%);
+  }
+
+  h1.page-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #90caf9;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .screens-container {
+    display: flex;
+    gap: 36px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .screen-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #90caf9;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 280px;
+    height: 580px;
+    background: #121212;
+    border-radius: 40px;
+    border: 3px solid #2d2d44;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px #3d3d5e, inset 0 0 30px rgba(255,255,255,0.02);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Notch */
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 22px;
+    background: #121212;
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+    border: 2px solid #2d2d44;
+    border-top: none;
+  }
+
+  /* AppBar */
+  .appbar {
+    background: #1565C0;
+    padding: 38px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .appbar-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .appbar-icon {
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    width: 18px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* Body */
+  .screen-body {
+    flex: 1;
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  /* Card */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  }
+
+  .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #212121;
+  }
+
+  .card-subtitle {
+    font-size: 0.75rem;
+    color: #757575;
+    margin-top: 3px;
+  }
+
+  /* FAB */
+  .fab {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    background: #1565C0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(21,101,192,0.5);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+
+  /* Form fields */
+  .form-field {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .field-label {
+    font-size: 0.65rem;
+    color: #1565C0;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .field-value {
+    font-size: 0.8rem;
+    color: #bdbdbd;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 4px;
+  }
+
+  /* Button */
+  .btn {
+    background: #1565C0;
+    color: white;
+    border-radius: 8px;
+    padding: 11px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Drawer overlay */
+  .drawer-screen {
+    display: flex;
+    position: relative;
+    flex: 1;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+
+  .drawer-panel {
+    width: 200px;
+    background: white;
+    height: 100%;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawer-header {
+    background: #1565C0;
+    padding: 20px 14px 14px;
+  }
+
+  .drawer-avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .drawer-name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .drawer-email {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 2px;
+  }
+
+  .drawer-item {
+    padding: 13px 16px;
+    font-size: 0.8rem;
+    color: #424242;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+  }
+
+  .drawer-item-icon {
+    font-size: 0.95rem;
+    color: #1565C0;
+  }
+
+  .drawer-dim {
+    flex: 1;
+    background: rgba(0,0,0,0.35);
+    height: 100%;
+  }
+
+  /* Service reminder */
+  .reminder-card {
+    background: white;
+    border-radius: 12px;
+    padding: 13px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reminder-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .icon-oil { background: #fff3e0; }
+  .icon-ins { background: #e8f5e9; }
+  .icon-tyre { background: #fce4ec; }
+
+  .reminder-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #212121;
+  }
+
+  .reminder-sub {
+    font-size: 0.72rem;
+    color: #757575;
+    margin-top: 2px;
+  }
+
+  /* Badge chip */
+  .badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    background: #e3f2fd;
+    color: #1565C0;
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-weight: 700;
+    margin-top: 5px;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .badge.warn { background: #fff3e0; color: #e65100; }
+  .badge.danger { background: #fce4ec; color: #c62828; }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .stat-box {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+
+  .stat-val {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #1565C0;
+  }
+
+  .stat-lbl {
+    font-size: 0.6rem;
+    color: #9e9e9e;
+    margin-top: 2px;
+  }
+
+  /* mini chart bar */
+  .chart-area {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+
+  .chart-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #424242;
+    margin-bottom: 10px;
+  }
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 50px;
+  }
+
+  .bar {
+    flex: 1;
+    background: #1565C0;
+    border-radius: 3px 3px 0 0;
+    opacity: 0.85;
+  }
+
+  .bar:nth-child(2) { opacity: 0.65; }
+  .bar:nth-child(3) { opacity: 0.80; }
+  .bar:nth-child(4) { opacity: 0.55; }
+  .bar:nth-child(5) { opacity: 0.90; }
+
+  .bar-labels {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .bar-lbl {
+    flex: 1;
+    text-align: center;
+    font-size: 0.5rem;
+    color: #9e9e9e;
+  }
+
+  /* Vehicle icon */
+  .vehicle-icon {
+    font-size: 2rem;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    background: #66bb6a;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  /* Section header */
+  .section-header {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #9e9e9e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .form-screen-body {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .screen-desc {
+    max-width: 280px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #6b7eaa;
+    line-height: 1.5;
+  }
+
+  /* Code section */
+  .code-section {
+    max-width: 860px;
+    margin: 48px auto 0;
+    background: #0d1117;
+    border-radius: 16px;
+    border: 1px solid #2d2d44;
+    overflow: hidden;
+  }
+
+  .code-header {
+    background: #161b22;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #2d2d44;
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .code-title {
+    font-size: 0.8rem;
+    color: #7d8590;
+    margin-left: 8px;
+    font-family: monospace;
+  }
+
+  .code-content {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .file-item {
+    background: #161b22;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid #2d2d44;
+  }
+
+  .file-name {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #79c0ff;
+    margin-bottom: 4px;
+  }
+
+  .file-desc {
+    font-size: 0.7rem;
+    color: #7d8590;
+    line-height: 1.5;
+  }
+
+  .dep-tag {
+    display: inline-block;
+    background: #1c2d3d;
+    color: #58a6ff;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    font-family: monospace;
+    margin: 2px 2px 0 0;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">🚗 AutoFolio — Flutter App</h1>
+<p class="subtitle">Visual Output · All Screens · Android Studio Preview</p>
+
+<div class="screens-container">
+
+  <!-- SCREEN 1: Home Page -->
+  <div class="screen-wrapper">
+    <div class="screen-label">🏠 Home Page</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="appbar">
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <div class="appbar-title">AutoFolio</div>
+        <div class="appbar-icon">⋮</div>
+      </div>
+      <div class="screen-body">
+        <div class="section-header">My Vehicle</div>
+        <div class="card">
+          <span class="vehicle-icon">🚙</span>
+          <div class="card-title">Vehicle Name</div>
+          <div class="card-subtitle"><span class="status-dot"></span>Fuel Efficiency: 18 km/l</div>
+          <span class="badge">Active</span>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-val">18</div>
+            <div class="stat-lbl">km/l</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">12k</div>
+            <div class="stat-lbl">km total</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">₹840</div>
+            <div class="stat-lbl">last fill</div>
+          </div>
+        </div>
+
+        <div class="chart-area">
+          <div class="chart-title">📊 Monthly Fuel Expense</div>
+          <div class="bars">
+            <div class="bar" style="height:32px"></div>
+            <div class="bar" style="height:24px"></div>
+            <div class="bar" style="height:40px"></div>
+            <div class="bar" style="height:18px"></div>
+            <div class="bar" style="height:45px"></div>
+          </div>
+          <div class="bar-labels">
+            <div class="bar-lbl">Nov</div>
+            <div class="bar-lbl">Dec</div>
+            <div class="bar-lbl">Jan</div>
+            <div class="bar-lbl">Feb</div>
+            <div class="bar-lbl">Mar</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="fab">+</div>
+    </div>
+    <div class="screen-desc">Main dashboard showing vehicle summary card, stats row, and fuel expense chart</div>
+  </div>
+
+  <!-- SCREEN 2: Drawer Open -->
+  <div class="screen-wrapper">
+    <div class="screen-label">☰ Drawer Menu</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="appbar">
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <div class="appbar-title">AutoFolio</div>
+      </div>
+      <div class="drawer-screen">
+        <div class="drawer-panel">
+          <div class="drawer-header">
+            <div class="drawer-avatar">👤</div>
+            <div class="drawer-name">AutoFolio User</div>
+            <div class="drawer-email">offline@local.app</div>
+          </div>
+          <div class="drawer-item"><span class="drawer-item-icon">⛽</span>Add Fuel Entry</div>
+          <div class="drawer-item"><span class="drawer-item-icon">🔧</span>Service Reminders</div>
+          <div class="drawer-item"><span class="drawer-item-icon">🚗</span>My Vehicles</div>
+          <div class="drawer-item"><span class="drawer-item-icon">📊</span>Reports</div>
+        </div>
+        <div class="drawer-dim"></div>
+      </div>
+    </div>
+    <div class="screen-desc">Side navigation drawer with UserAccountsDrawerHeader and menu items</div>
+  </div>
+
+  <!-- SCREEN 3: Fuel Entry -->
+  <div class="screen-wrapper">
+    <div class="screen-label">⛽ Fuel Entry</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="appbar">
+        <div style="color:white;font-size:1.1rem;">←</div>
+        <div class="appbar-title" style="margin-left:8px;">Fuel Entry</div>
+      </div>
+      <div class="form-screen-body">
+        <div class="section-header" style="margin-bottom:12px;">New Fuel Log</div>
+        <div class="form-field">
+          <div class="field-label">Odometer Reading</div>
+          <div class="field-value">Enter km reading...</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Fuel Litres</div>
+          <div class="field-value">Enter litres filled...</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Fuel Cost (₹)</div>
+          <div class="field-value">Enter total cost...</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Date</div>
+          <div class="field-value">10 March 2026</div>
+        </div>
+        <div class="btn">💾 Save Entry</div>
+        <div style="text-align:center;margin-top:10px;font-size:0.68rem;color:#9e9e9e;">Stored locally using Hive DB</div>
+      </div>
+    </div>
+    <div class="screen-desc">Form with TextFormField widgets for odometer, litres, and cost. Validates & saves to Hive.</div>
+  </div>
+
+  <!-- SCREEN 4: Service Reminder -->
+  <div class="screen-wrapper">
+    <div class="screen-label">🔧 Service Reminders</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="appbar">
+        <div style="color:white;font-size:1.1rem;">←</div>
+        <div class="appbar-title" style="margin-left:8px;">Service Reminders</div>
+      </div>
+      <div class="form-screen-body">
+        <div class="section-header" style="margin-bottom:10px;">Upcoming</div>
+
+        <div class="reminder-card">
+          <div class="reminder-icon icon-oil">🛢️</div>
+          <div>
+            <div class="reminder-title">Oil Change Reminder</div>
+            <div class="reminder-sub">Due in 500 km</div>
+            <span class="badge warn">⚠️ Soon</span>
+          </div>
+        </div>
+
+        <div class="reminder-card">
+          <div class="reminder-icon icon-ins">📋</div>
+          <div>
+            <div class="reminder-title">Insurance Renewal</div>
+            <div class="reminder-sub">Due on 20 July 2026</div>
+            <span class="badge">✅ On Track</span>
+          </div>
+        </div>
+
+        <div class="reminder-card">
+          <div class="reminder-icon icon-tyre">🔄</div>
+          <div>
+            <div class="reminder-title">Tyre Replacement</div>
+            <div class="reminder-sub">After 40,000 km</div>
+            <span class="badge danger">🔴 Overdue</span>
+          </div>
+        </div>
+
+        <div style="margin-top:6px;text-align:center;">
+          <div class="btn" style="background:#e8f5e9;color:#2e7d32;font-size:0.75rem;padding:8px;">+ Add New Reminder</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-desc">ListView with Card widgets for Oil Change, Insurance Renewal, and Tyre Replacement reminders</div>
+  </div>
+
+</div>
+
+<!-- File Structure & Dependencies -->
+<div class="code-section">
+  <div class="code-header">
+    <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+    <span class="code-title">AutoFolio — Project Structure & Dependencies</span>
+  </div>
+  <div class="code-content">
+    <div class="file-item">
+      <div class="file-name">📄 main.dart</div>
+      <div class="file-desc">App entry point. Initializes Hive, opens 'vehicles' box, runs AutoFolioApp with MaterialApp → HomePage.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">🚗 models/vehicle.dart</div>
+      <div class="file-desc">Vehicle data model with: name, type, totalDistance, fuelEfficiency fields.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">🏠 screens/home_page.dart</div>
+      <div class="file-desc">StatefulWidget. Scaffold with AppBar, Drawer (UserAccountsDrawerHeader + ListTiles), Card, FAB.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">⛽ screens/fuel_entry_screen.dart</div>
+      <div class="file-desc">Form screen with GlobalKey, 3x TextFormField (odometer, litres, cost), ElevatedButton to save & pop.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">🔧 screens/service_reminder_screen.dart</div>
+      <div class="file-desc">StatelessWidget. ListView with 3 Cards: Oil Change, Insurance Renewal, Tyre Replacement.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">📦 pubspec.yaml — Dependencies</div>
+      <div class="file-desc">
+        <span class="dep-tag">hive: ^2.2.3</span>
+        <span class="dep-tag">hive_flutter: ^1.1.0</span>
+        <span class="dep-tag">fl_chart: ^0.68.0</span>
+        <span class="dep-tag">path_provider: ^2.0.15</span>
+        <span class="dep-tag">hive_generator: ^2.0.1</span>
+        <span class="dep-tag">build_runner: ^2.4.6</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
